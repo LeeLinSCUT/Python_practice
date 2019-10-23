@@ -1,0 +1,4 @@
+（一）Cpython和PyPy的区别：
+       Cpython是python解释器，是用C语言开发的。PyPy也是Python解释器，采用JIT技术，对Python代码进行动态编译（而不是解释）。
+       代码在这两个解释下运行时，要了解他们的不同点。
+       
