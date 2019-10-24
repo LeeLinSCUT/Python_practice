@@ -1,5 +1,5 @@
 def product(*nums):
-    re = 1 
+    re = 1    #传入过来的nums已经被整理成了tuple
     if len(nums)==0:
         raise TypeError
     for num in nums:
