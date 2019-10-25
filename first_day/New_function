@@ -3,3 +3,17 @@
 
 函数名：chr（）
 函数解释：chr（）函数把编码转换为对应的字符
+
+函数名：encode()
+函数解释：字符串.encode('编码方式'） 可以把字符串要找编码方式编码成bytes类型的数据
+
+函数名：list.append('') 函数解释：追加元素到末尾
+函数名：list.insert(index,'') 函数解释：插入制定元素
+函数名：list.pop(index) 函数解释：删除指定元素
+
+函数名：range(Num) 函数解释：可以生产0到Num-1的整数序列。
+函数名：list() 函数解释：可以用list()转换为list
+
+函数名：isinstance(object, classinfo)
+函数解释：object---实例对象，classinfo -- 可以是直接或间接类名、基本类型或者由它们组成的元组。
+如果对象的类型与参数二的类型（classinfo）相同则返回 True，否则返回 False。
