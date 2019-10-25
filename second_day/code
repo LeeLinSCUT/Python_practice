@@ -1,0 +1,49 @@
+def trim(s)
+   if s[:1] == ' ':    #将左边的空格全部去掉 如果使用[0] 当s为空的时候会报错，但是如果s为空的时候切片结果也会是空，不会报错。
+        return trim(s[1:])      
+    elif s[-1:] == ' ':  #将右边的空格全部去掉
+        return trim(s[:-1])
+    return s
+代码解释：只要左边右边有空格就会被卡住，输出不了结果。整体是按照顺序将左边的空格去掉，然后再将右边的空格去掉。最后才能到达return s
+
+# -*- coding: utf-8 -*-
+def findMinAndMax(L):
+    if L==[]:  
+        return (None,None)    
+    else:
+        min=L[0]
+        max=L[0]
+        for i in L:
+            if i<min:
+                min=i
+            if i>max:
+                max=i
+        return(min,max)    
+     
+# -*- coding: utf-8 -*-
+def triangles():
+  Ln=[1]
+  while True:  #迭代值是一个列表，他的值可以由上一个列表推出来,上一个列表就是上一次的迭代值。
+        yield (Ln)
+        Ln=[0]+Ln+[0]
+        Ln=[ Ln[i]+Ln[i+1] for i in range(len(Ln)-1)]
+分析一次迭代之后，我们还是存有上一次的迭代结果的。可以利用上一次的迭代结果获得新的输出。[0,Ln]和[0]+[Ln]是不一样的。
+
+
+    #s=s.replace('.','')  #s.replace不行,并不会改变s.replace
+    L_l=[]
+    L_r=[]
+    num=0
+    digits = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,'.':'.'}
+    L=list(map(lambda x:digits[x] ,s))  #单次的lambda作用是利用传入的s作为key找到想要的value。map将其找到的value整合成一个
+    #iterator。利用list()转换成一个list。
+    for i in L:
+        if i != '.':
+            L_l.append(i) 
+            num=num+1
+        else: 
+            L_r=L[num+1:]
+            break
+    return reduce(lambda x,y: x*10+y, L_l)+(.001)*reduce(lambda x,y:x*10+y,L_r)
+   
+  
