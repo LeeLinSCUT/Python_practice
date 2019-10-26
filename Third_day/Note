@@ -1,1 +1,44 @@
-(1)
+(1)sorted高阶函数（由一个列表作为参数输入一个函数，按照函数返回结果将列表的元素重新排序）
+    sorted()可以接受一个key函数来实现自定义的排序。key指定的函数将作用于list的每一个元素上，并且按照key函数返回的结果进行排序。
+    将返回的结果值进行排序是自动的，使用的重点是考虑这组iterable数据的什么东西是否可以进行处理。
+（2）高阶函数总结
+    a)map是将一个列表作为参数输入到一个函数中，然后将返回的结果作为一个列表重新构成。
+    b)reduce同map，只是要求函数有两个参数。返回进行累积的结果。最后结果是一个值
+    c)filter是将列表的结果作为参数输入到函数中，函数返回Ture则保留该参数。是对列表元素的整理。
+    d）sorted参上。最后返回的是原来完整的列表，但是经过一定的规律排序。
+（3）返回函数
+def lazy_sum(*args):
+    def sum():   #我们在lazy_sum中定义了函数sum。函数sum可以引用lazy_sum的参数和局部变量。
+        ax = 0
+        for n in args:
+            ax = ax + n
+        return ax
+    return sum        #当返回函数sum时，相关参数(args)和局部变量都保存在返存的函数里。
+   当我们调用lazy_sum()时，每次调用都会返回一个新的函数，即使传入相同的参数：f1()和f2()的调用结果互不影响。
+   在闭包内函数也是类似的情况。在内函数中想修改闭包变量（外函数绑定给内函数的局部变量）的时候：使用nonlocal关键字声明。
+（4）匿名函数
+    lambda 函数参数：表达式，实际参数  只能有一个表达式，没有return，返回值就是表达式的结果。
+ (5)装饰器（Decorator）相当于返回一个内函数套在原函数上。
+     函数对象可以被赋值给变量，变量也能调用该函数。         
+     def log(func):  #log也是一个返回函数（返回的内函数，在再次call的时候调用）的高阶函数。 decorator接受一个函数作为参数同时在内函数里进行操作。
+        def wrapper(*args, **kw): #这个内函数参数定义是一个可变参数（可以输入任意参数）和关键字参数。因此可以接受任意参数的调用。
+            print('call %s():' % func.__name__)
+            return func(*args, **kw)
+        return wrapper
+         @log  #相当于 now=log（now) log的内函数套在了now身上，同时now也指向自己的函数对象，也就是now指向了内函数同时也指向了一个外函数。内函数返回的
+         也正是func原始函数。但是这个时候now的名字已经编程了log返回的 wrapper
+         def now():
+             print('2015-3-25')
+    
+def log(text): #使用外函数，将text局部变量传入了内函数（Decorator）
+    def decorator(func):
+        @functools.wraps(func) #把原始函数的__name__等属性复制到wrapper（）函数中
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+    @log('execute') #这个log（'execute')返回的是 now = log('execute')(now) now作为函数会自动传入Decorator的函数参数
+        def now():
+        print('2015-3-25')
+ 结论：总的来说还是按照顺序的，首先执行原函数前执行内函数，然后内函数返回原函数之后再继续执行原函数。
