@@ -1,0 +1,54 @@
+(1)__xxx__
+类似__xxx__的属性和方法在Python中都是有特殊用途的
+    (a)__slots__=()里面装的是tuple
+    class Student(object):
+    __slots__ = ('name', 'age') # 用tuple定义允许绑定的属性名称
+    在类使用__slots__可以限制实例属性。只对当前类有效，对继承的子类是不起作用的。
+    (b)__len__() 
+    __len__方法返回长度。在Python中，如果你调用len()函数试图获取一个对象的长度，
+    实际上，在len()函数内部，它自动去调用该对象的__len__()方法.
+    （c)__str__()
+    该方法返回的值将会被print出来。
+    （d）__iter__
+    Python的for循环就会不断调用迭代对象的__next__()方法拿到循环的下一个值
+    def __iter__(self):
+        return self # 实例本身就是迭代对象，故返回自己
+    （e)__getitem__()
+     要表现得像list那样按照下标取出元素，需要实现__getitem__()方法： def __getitem__(self, n):
+     list使用切片操作的时候传入的是[slice]
+     (f)__getarrt__()
+     当调用不存在的属性时，比如score，Python解释器会试图调用__getattr__(self, 'score')来尝试获得属性，这样，我们就有机会返回score的值
+     def __getattr__(self, attr): #attr 被调用的不存在的属性名字作为字符串传入
+        if attr=='score':
+            return 99
+     这种完全动态调用的特性有什么实际作用呢？作用就是，可以针对完全动态的情况作调用。
+     （g)__call__
+(2)Enum 枚举类
+  from enum import Enum
+  class Color(Enum):
+     red = 1   #red的类型是color
+     green = 2
+     blue = 3  #成员值允许相同，第二个成员的名称被视作第一个成员的别名
+     
+     print(Color['red'])  # Color.red  通过成员名来获取成员
+     print(Color(1))      # Color.red  通过成员值来获取成员
+     
+     每个成员都有名称属性和值属性：
+     member = Color.red
+     print(member.name)   # red
+     print(member.value)  # 1
+     
+     支持迭代的方式遍历成员，按定义的顺序，如果有值重复的成员，只获取重复的第一个成员：
+      for color in Color:
+      print(color)
+      
+      特殊属性 __members__ 是一个将名称映射到成员的有序字典，也可以通过它来完成遍历：
+      for color in Color.__members__.items():
+        print(color)
+(3)type（） 
+    type函数允许我们动态创建出类来。
+    type(name, bases, dict) name -- 类的名称。
+    bases  继承的父类集合，注意Python支持多重继承，如果只有一个父类，别忘了tuple的单元素写法；
+    dict class的方法名称与函数绑定，这里我们把函数fn绑定到方法名hello上
+（4）metaclass
+    省略。
