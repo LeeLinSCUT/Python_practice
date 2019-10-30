@@ -1,0 +1,67 @@
+(1)文件读写
+  磁盘上的读写文件功能都是操作系统提供的，我们并不能通过程序直接从磁盘中获取数据。这是现代操作系统不允许的。我们是请求操作系统首先打开
+  一个文件对象（文件描述符），然后通过操作系统提供的接口进行操作。
+(2)读文件
+  f = open('/Users/michael/test.txt', 'r')
+  f.close()
+  with open('/path/to/file', 'r') as f:
+    print(f.read())
+(3)file-like Object
+  open()返回的对象是有read()的方法的，像这种对象在Python中统称为file-like Object。还可以是内存的字节流，网络流····
+(4)字符编码 
+  默认将的都是读取文本文件，都是UTF-8编码的文本文件。如果读取的非UTF-8编码，如果加入encoding参数。
+(5)写文件
+  f = open('/Users/michael/test.txt', 'w')
+你可以反复调用write()来写入文件，但是务必要调用f.close()来关闭文件。当我们写文件时，操作系统往往不会立刻把数据写入磁盘，而是放到内存缓存起来，
+空闲的时候再慢慢写入。只有调用close()方法时，操作系统才保证把没有写入的数据全部写入磁盘。
+(6)StringIO和BytesIO
+  StringIO只能操作str
+  from io import StringIO
+  f = StringIO() #创建一个StringIO
+  f.write('hello')
+  print(f.getvalue()) #用于获得写入的str
+  
+  >>> from io import BytesIO
+  >>> f = BytesIO()
+  >>> f.write('中文'.encode('utf-8'))
+  6
+  >>> print(f.getvalue())
+  b'\xe4\xb8\xad\xe6\x96\x87'
+(7)操作文件和目录
+  一般来说我们操作系统的文件目录，可以在命令行输入操作系统给提供的命令才完成。如果要在程序中完成这些操作的话，
+  使用Python内置的os模块直接调用操作系统提供的接口函数。
+  import os
+  os.name # 操作系统类型
+  os.environ #查看操作系统中定义的环境变量
+  # 查看当前目录的绝对路径:
+   os.path.abspath('.')
+  '/Users/michael'
+  # 在某个目录下创建一个新目录，首先把新目录的完整路径表示出来:
+  >>> os.path.join('/Users/michael', 'testdir')
+  '/Users/michael/testdir' #这是讲两个str串成一个路径。split同样可以使用。
+  # 然后创建一个目录:
+  >>> os.mkdir('/Users/michael/testdir')
+  # 删掉一个目录:
+  >>> os.rmdir('/Users/michael/testdir')
+(8)序列化
+  Python提供了pickle模块来实现序列化。我们把变量从内存中变成可存储或传输的过程称之为序列化.
+  pickle.dumps()方法把任意对象序列化成一个bytes，然后，就可以把这个bytes写入文件。 此时里面的数据一般都是乱七八糟的。
+  当我们要把对象从磁盘读到内存时，可以先把内容读到一个bytes，然后用pickle.loads()方法反序列化出对象
+（9）Json（是数据的一种序列化方式）
+  如果我们要在不同的编程语言之间传递对象，就必须把对象序列化为标准格式，
+  比如XML，但更好的方法是序列化为JSON，因为JSON表示出来就是一个字符串，可以被所有语言读取，也可以方便地存储到磁盘或者通过网络传输。
+  JSON不仅是标准格式，并且比XML更快，而且可以直接在Web页面中读取，非常方便。
+  json.dumps(d)#序列化，返回一个str，内容是标准的JSON
+  json.loads(json_str) #反序列化
+(10)对象的序列化
+  json.dumps(s, default=student2dict)  #default表示序列化的时候调用这个函数
+  def student2dict(std): #添加该新的转换函数 感觉参数是指的对象本身
+    return { 
+        'name': std.name,
+        'age': std.age,
+        'score': std.score
+    }
+    如果我们要把JSON反序列化为一个Student对象实例，loads()方法首先转换出一个dict对象，
+    然后，我们传入的object_hook函数负责把dict转换为Student实例：
+    def dict2student(d): #反序列化的时候传入JSON的dic
+    return Student(d['name'], d['age'], d['score'])  #序列化是把变量dic序列化了。
