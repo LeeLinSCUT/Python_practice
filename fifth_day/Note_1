@@ -1,0 +1,32 @@
+(1)logging模块的详细使用
+  Loggers: 是我们进行日志记录时创建的对象，我们可以调用它的方法传入日志模板和信息，来生成一条条日志记录，称作 Log Record。
+  Handlers: 即用来处理日志记录的类，它可以将 Log Record 输出到我们指定的日志位置和存储形式等，
+  如我们可以指定将日志通过 FTP 协议记录到远程的服务器上，Handler 就会帮我们完成这些事情。
+  Filters:对日志信息进行过滤， 提供更细粒度的日志是否输出的判断
+  Formatters: 际上生成的 Log Record 也是一个个对象，那么我们想要把它们保存成一条条我们想要的日志文本的话，
+  就需要有一个格式化的过程，那么这个过程就由 Formatter 来完成，返回的就是日志字符串，然后传回给 Handler 来处理。
+  日志级别
+  在记录日志时, 日志消息都会关联一个级别。可以给日志对象(Logger Instance)设置日志级别，低于该级别的日志消息将会被忽略。
+(2)常用函数
+  logging.basicConfig([**kwargs])
+  为日志模块配置基本信息。kwargs 支持如下几个关键字参数：
+  filename ：日志文件的保存路径。如果配置了些参数，将自动创建一个FileHandler作为Handler；而不再是 StreamHandler，这样日志信息便会输出到文件中了。
+  filemode ：日志文件的打开模式。 默认值为’a’，表示日志消息以追加的形式添加到日志文件中。如果设为’w’, 那么每次程序启动的时候都会创建一个新的日志文件；
+  format ：设置日志输出格式；
+  datefmt ：定义日期格式；
+  level ：设置日志的级别.对低于该级别的日志消息将被忽略；
+  stream ：设置特定的流用于初始化StreamHandler；
+  logging.getLogger([name])
+  创建Logger对象。日志记录的工作主要由Logger对象来完成。
+  
+  import logging
+ 
+  logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+  #只输出 INFO 级别的信息，另外这里指定了 format 格式的字符串，包括 asctime、name、levelname、message 四个内容，
+  分别代表运行时间、模块名称、日志级别、日志内容，这样输出内容便是这四者组合而成的内容了。这是全局配置。
+  logger = logging.getLogger(__name__)#声明了一个 Logger 对象，它就是日志输出的主类 name是模块名称
+ 
+  logger.info('This is a log info') #调用了logger对象的info方法输出info级别的日志信息
+  logger.debug('Debugging')
+  logger.warning('Warning exists')
+  logger.info('Finish')
