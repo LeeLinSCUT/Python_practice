@@ -1,0 +1,11 @@
+torch.is_tensor(obj) #返回一个对象是否是pytorch的tensor（布尔类型）
+torch.is_floating_point(input) -> (bool) #判一个数据是否为 float类型
+torch.set_default_dtype(d) #设定数据类型是什么，默认的tensor数据类型是torch.float32。torch.tensor().
+torch.numel(input) → int #number of element input为tensor类型
+
+torch.mm(tensor1,tensor2) #是矩阵之间的相乘
+torch.matmul(input,other,out=None) # 如果都是一维的，结果会是点乘后相加。
+torch.randn()#产生随机数
+torch.max(input,dim，keepdim=False) #返回一个tuple（values，indices）为相应的最大值（each row of the inpue tensor in the given dim）
+keepdim为保持维度。dim=0则意味着改变行，列不变。求得每一列的最大值。
+torch.topk(input,k,dim) #寻找前k个最大值
