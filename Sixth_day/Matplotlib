@@ -44,4 +44,5 @@ R = np.sqrt(X ** 2 + Y ** 2)
 Z = np.sin(R)
 ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=plt.get_cmap('rainbow'))
  
-  
+(7)动态显示图片
+plt.ion() #正常显示模式默认为block模式，即是运行到plt.show()之后，程序会暂停到那儿，并不会继续执行下去。plt.ion()会继续执行。
