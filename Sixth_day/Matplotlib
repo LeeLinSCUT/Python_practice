@@ -22,3 +22,26 @@
 （3）图例（legend)
     
  plt.legend()     #打上图例
+
+(4）标注
+  plt.annotate(r'$2x+1=%s$' % y0, xy=(x0, y0), xycoords='data', xytext=(+30, -30),
+             textcoords='offset points', fontsize=16,
+             arrowprops=dict(arrowstyle='->', connectionstyle="arc3,rad=.2"))
+   plt.text(-3.7, 3, r'$This\ is\ the\ some\ text. \mu\ \sigma_i\ \alpha_t$',
+         fontdict={'size': 16, 'color': 'r'})
+（5）Image
+    plt.imshow(a, interpolation='nearest', cmap='bone', origin='lower') #a是伪图像，origin用upper会颠倒 
+（6）3D图像
+  from mpl_toolkits.mplot3d import Axes3D 
+  fig = plt.figure() #创建一个空的窗户
+  ax = Axes3D(fig)   #在空间里创建一组3D坐标
+  # X, Y value
+X = np.arange(-4, 4, 0.25)
+Y = np.arange(-4, 4, 0.25)
+X, Y = np.meshgrid(X, Y)    # x-y 平面的网格左边建立
+R = np.sqrt(X ** 2 + Y ** 2)
+# height value
+Z = np.sin(R)
+ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=plt.get_cmap('rainbow'))
+ 
+  
