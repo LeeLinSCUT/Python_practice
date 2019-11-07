@@ -1,0 +1,24 @@
+(1)import matplotlib.pyplot as plt 
+  plt.figure(num=3,figsize=(8,5)) #定义一个图像窗口
+  plt.plot(,y,color='red',linewidth=1.0,linestyle='--',lable='up')#画线，该线名字为up
+  plt.plot(x,y1，lable='down') #该线名字为down
+  
+  plt.xlim((-1,2))  #设置横坐标范围
+  plt.xticks(new_ticks) #设置x轴坐标点  new_ticks = np.linspace(-1,2,5) 画五个点。
+  plt.ylim((-2,3))  #设置竖坐标范围
+  plt.xlable('I am x') #设置x轴标签
+  plt.ylable('I am y') #设置y轴标签
+  
+ 
+  plt.show()   #显示图像
+  
+（2）调整坐标轴
+    ax = plt.gca() #获取当前坐标轴信息
+    ax.spines['right'].set_color('none') #设置边框颜色 none为消失，因此右边的边框消失了。
+    ax.xaxis.set_ticks_position("bottom") #设置坐标位置 是边框的那条边 将x轴设置为bottom边，这把bottom和x轴绑定在一起了
+    ax.spines['bottom'].set_position(('data',-1)) #把bottom边放置到了left边的-1处。
+    ax.spines['left'].set_position(('axes',0.1))  #把letf边放置到bottom的10%的地方
+ 
+（3）图例（legend)
+    
+ plt.legend()     #打上图例
