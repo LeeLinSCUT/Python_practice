@@ -1,2 +1,5 @@
-(1)torch.nn.functional 
-(2)from torch.autograd import Variable
+import torch 
+from torch.autograd import Variable 
+import matplotlib.pyplot as plt
+import torch.nn.functional as fun
+from mpl_toolkits.mplot3d import Axes3D
