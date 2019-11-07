@@ -1,0 +1,22 @@
+(1)CLASS torch.nn.Module(nn.Module)
+  是所有神经网络模块的父类，作为新建的模型的父类。本身是一个类。
+  class Model(nn.Module):
+    def __init__(self):
+        super(Model, self).__init__() #调用父类的构造方法即可完成注册。
+     
+(2)CLASS torch.nn.Linear(in_features, out_features, bias=True)
+   参数解释：in_features – size of each input sample
+            out_features – size of each output sample
+            bias – If set to False, the layer will not learn an additive bias. Default: True
+            Applies a linear transformation to the incoming data: y = xA^T + b #最后返回的是一个Tensor
+   包含的attribute：
+   a）weight：模型中可学习的权重，shape:（n_output,n_input)
+   b) bias: 模型中可学习的偏置 shape:(out_features) 
+   两者的初始化值都在(-sqrt(k),sqrt(k))之前。k=1/(n_input) 
+   
+   
+(3)torch.nn.functional.relu(input, inplace=False) → Tensor #input的是一个Tensor
+  只是调用了result = torch.relu_(input)  ReLU(x)=max(0,x)
+  
+（4）Class torch.nn.Parameters
+  Parameters
