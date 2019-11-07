@@ -1,0 +1,12 @@
+（1）总结
+  In short， if a Pytorch operation supports broadcast， then its Tensor arguments can be automatically expanded to be 
+  of equal sizes（without making copies of the data）
+（2）广播条件
+  a)每个tensor至少要有一维
+  b)从trailing维开始，该维的size相同or其中一个是1or不存在。
+（3）广播操作
+  a)如果tensor的维数不一致的话，会扩张1到少的那个tensor作为一维从而是他们维数长度一样
+  b)对于每一维的大小，结果是得最大值。
+（4）广播规律
+  矩阵和矩阵之间的维数总是末尾对齐开始广播的。  
+  
