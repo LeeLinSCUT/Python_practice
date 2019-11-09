@@ -1,0 +1,19 @@
+1）convnet models的兴起原因
+  i）更大的training set ii)GUP的强力表现 iii）更好的正则化措施（比如Dropout）
+2）反卷积网络（deconvolutional network）
+  卷积网络 input image * feature filter = feature map （本来一个卷积核的卷积结果也应该一个方块的，当时我们进行了求和操作成为了一个
+  feature map）
+  反卷积网络 feature map * feature filter = input image
+  所谓的反卷积其实是转置卷积。
+  那为什么不能叫反卷积？
+  反卷积的数学含义，通过反卷积可以将通过卷积的输出信号，完全还原输入信号
+    而事实是，转置卷积只能还原shape大小，不能还原value.因为在卷积操作的时候已经丢失了原始数据，懂卷积操作过程的人都理解。
+3）反池化过程
+  通过记录池化过程中，最大激活值得坐标位置。然后在反池化的时候，只把池化过程中最大激活值所在的位置坐标的值激活，其它的值置为0。
+  这只是个近似操作，其他位置的值本来不应该为0的。
+4)Realted Work Part Summary
+  对于大部分方法来说，只有第一层的featuremap profections to pixel space是有可能的。在更高的层次的方法有很有局限性，比如（Erhan et al）
+  找到对于各个unit最佳的stimulus通过对image space的梯度下降来最大化unit‘s activation。对于给定的一个unit，在数值上如何获得最佳的响应。
+  但是这些都没办法揭示高层网络的inviarance（不变性）。paper的方法相比之下是提供了非参数化的不变性，展示怎么样的trainset激活featuremap。
+  有人展示了dataset中什么部分对于模型的高层来说有着很大的activation。paper的是自顶向下的投影展示什么部分刺激一个特定的featuremap。
+5）Approach part Summary
