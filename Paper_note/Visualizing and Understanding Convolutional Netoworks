@@ -17,3 +17,35 @@
   但是这些都没办法揭示高层网络的inviarance（不变性）。paper的方法相比之下是提供了非参数化的不变性，展示怎么样的trainset激活featuremap。
   有人展示了dataset中什么部分对于模型的高层来说有着很大的activation。paper的是自顶向下的投影展示什么部分刺激一个特定的featuremap。
 5）Approach part Summary
+  (a）每一层包括上一层输出结果的卷积输出,经过Relu函数后的输出结果,最大化池化，局部归一化（local contrast normalization）
+  (b)使用stochastic gradient descent更新参数。
+  (c)实现map activities back to the input pixel space，使用反卷积网络作为一个已经训练过的convnet的probe。
+  (d)开始时。一张输入的图片输入convnet，然后features经过层层网络计算出来。为了检测一个给定的convnet activation，我们把该层其他的activations
+  全部置零，然后把input maps作为输入到相连接的deconvnet。然后我们实现unpool，rectify和卷积操作。
+  (e)Unpooling：Unpool使用switches让需要重建的数据放在合适的位置。
+     Rectification:使用relu non-linearities，rectify feature mpas 来保证特征图总是正值。
+     Filtering：使用学习好的filters来卷积之前层的featuresmap。作用于rectified maps，而不是下一层的输出。
+  (f)从上到下的投影使用在convnet中maxpooling层产生的swtich settings，因为这些switch settings 对于一张给定的input image是特别的。
+  （也就是switch settings会根据输入的image改变？）,从单个activation获取到的重建数据因此会和原始输入的一小部分相似。结构的加权是根据他们
+  对feature activation的贡献。
+  (g)训练细节：结构和2012年的Alexnet是很类似的，不同的是在layers 3，4，5使用了dense connections。用ImageNET 2012 Training Set训练的。
+  每一张RGB图像都预处理成了256X256的尺寸，减去了per-pixel mean。使用10个不同的sub-crops。在128的mini-batch上使用SGD更新梯度。
+  从0.01的学习率开始，momentum term=0.9.当验证集的错误率趋于不变的时候我们降低了学习率。在全连接层使用了Dropout。
+  初始权重都为0.01，bias为0.
+  (h)可视化用的第一层的filters有一些起了支配的作用。为了减轻这个效果，我们重新对filter进行归一化，让他们的RMS在0。1之内。
+6）Convnet Visualization
+  a)比起展示对于给定的一张feature map中最强的那个activation，展示的是TOP 9 activation。分别把他们每一个投影回到像素空间，展示不同的
+  structions激活一个给定的feature map,从而展示了当输入改变的时候的模型的不变性。
+  b)对于底层的网络within a few opochs就可以训练好，提取到想要的feature，但是对于upper layers只有在一定的opochs之后才有效果。
+  e)对于低层的层数来说，图片的变形会带来很大的影响，但是对于高的层数来说影响不大。
+7）对Alexnet的提高
+  Alexnet第一层混有很高频和很低频的信息，而汇集了很少的中频的信息。第二层的视觉化展示了由于大步长造成的混叠伪像。(步长相当于采样频率，
+  补长过低会导致采样频率过低，导致频率混叠。）解决方法为2：（i）降低了第一层的滤波器的尺寸（ii）降低了第二层的步长。
+8)Occlusion Sensitivity（物体遮挡敏感度）
+  有分类问题的时候，我们会提出model是在真的检测物体的位置还是只是在利用周围的信息来进行分类。Fig.7通过遮挡他输入图片的不同部分来回答
+  问题。例子表现model在定位场景中的物体
+9)Correspondence Analysis
+  深度学习模型和现在很多已经存在的识别方法不同，没有用来建立特定的物体之间的相应关系。实验中将图片用mask部分得遮起来，比如说狗的左眼
+  或者右眼，或者鼻子。然后测量不同图片之间在某一层特征图的一致性。越低的值表示mask操作带来的结果还是有很好的一致性。因此同样的物体在
+  不同的图片中很紧密的相关性。
+  
