@@ -20,3 +20,14 @@
   
 （4）Class torch.nn.Parameters
   Parameters
+
+(5)CLASStorch.nn.CrossEntropyLoss(weight=None, size_average=None, ignore_index=-100, reduce=None, reduction='mean')
+这个标准结合了nn.LogSoftmax()和nn.NLLLoss()。
+在训练一个有C种类的分类问题的时候是有用的。使用的时候，可选参数weight应该是1维的tensor，定义了各个类的权重。这个在你有一个不平衡
+训练集的时候特别有用。
+输入应该是一个给每一个类的未归一化的数据（行），大小应该是（minibatch，C）
+标准期待类的标签范围是[0,C-1]作为target，1D的向量，深度是minibatch。如果ignore_index被规定了，也可以接受calss index0
+Shape:
+Input (N,C) C:number of classes  N:minibatch
+Target:(N) N：minibatch
+Output:
