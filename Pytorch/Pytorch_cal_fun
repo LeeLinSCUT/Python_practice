@@ -9,3 +9,10 @@ torch.randn()#产生随机数
 torch.max(input,dim，keepdim=False) #返回一个tuple（values，indices）为相应的最大值（each row of the inpue tensor in the given dim）
 keepdim为保持维度。dim=0则意味着改变行，列不变。求得每一列的最大值。
 torch.topk(input,k,dim) #寻找前k个最大值
+
+(7）torch.normal(means, std, out=None) 
+返回一个张量，包含从给定参数means,std的离散正态分布中抽取随机数。 均值means是一个张量，包含每个输出元素相关的正态分布的均值。
+std是一个张量，包含每个输出元素相关的正态分布的标准差。 均值和标准差的形状不须匹配，但每个张量的元素个数须相同。
+
+(8）torch.cat(tensors, dim=0, out=None) → Tensor
+可以看作是torch.split的相反操作，tensors-任何ptyhon的tensor序列，要求这两个序列有同样的type。 dim-你想要拼接的维度。
