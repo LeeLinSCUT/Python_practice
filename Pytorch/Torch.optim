@@ -1,0 +1,11 @@
+(1)torch.optim是一个用来实现多种优化算法的包，最常用的方法都是支持的，接口也是足够的通用。所以更加复杂的算法也能够简单地在未来综合进来。
+(2)使用torch.optim你必须得创建一个优化器实例，这个优化器实例会保持状态且根据计算的梯度更新梯度。
+(3)创建一个优化器你必须给他可迭代的参数。然后就可以具体设定优化器的参数例如学习率和权重衰减等等
+(4)如果你需要将一个模型移到GPU通过.cuda()，请在创建优化器之前就这么做。一个模型的参数在.cuda()之后的和哪些之前的是不一样的。
+一般来说，你需要确认优化好的参数一直保持在一致的位置。
+(5)CLASS torch.optim.SGD(params,lr=<required parameter>,momentum=0,dampening=0,weight_decay=0,nesterov=False)
+解释：实现随机梯度衰减
+参数解释：params(iteralbe)可迭代的参数  lr学习率 momentum-momentum factor weight_decay：weight decay（L2 penalty）
+dampening-dampening for momentum nesterov-bools，使能Nesterov momentum
+(6)optimizer.zero_grad()意思是把梯度置零，也就是把loss关于weight的导数变成0.
+因为一个batch的loss关于weight的导数是所有sample的loss关于weight的导数的累加和
