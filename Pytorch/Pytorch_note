@@ -1,0 +1,8 @@
+(1)需要一个优化器的实例，同时也需要一个损失函数的实例。损失函数用于计算损失值，然后基于损失值来进行向后传播。优化器在这里用于更新参数。
+  prediction = net(x)   #这里是调用了forward方法
+	loss = loss_func(prediction,y) #计算两个值的损失
+	optimizer.zero_grad() #这里清空了上一次优化器中存储的梯度值，便于这次的数值更新。
+	loss.backward()      #基于该损失值的向后传播后，获得了梯度值。
+	optimizer.step()     #loss.backward()获得所有parameter的gradient。
+   #然后optimizer存了这些parameter的指针，step()根据这些parameter的gradient对parameter的值进行更新。
+   optimizer更像是一个管理梯度更新的东西，本身并不参与梯度值的计算。他负责管理如何更新，loss函数给他提供梯度值。
