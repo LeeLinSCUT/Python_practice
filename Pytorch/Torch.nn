@@ -19,7 +19,16 @@
   只是调用了result = torch.relu_(input)  ReLU(x)=max(0,x)
   
 （4）Class torch.nn.Parameters
-  Parameters
+  Parameter 是torch.autograd.Variable的一个字类，常被用于Module的参数。例如权重和偏置。
+  Parameters和Modules一起使用的时候会有一些特殊的属性。parameters赋值给Module的属性的时候，
+  它会被自动加到Module的参数列表中，即会出现在Parameter()迭代器中。将Varaible赋给Module的时候没有这样的属性。
+  这可以在nn.Module的实现中详细看一下。这样做是为了保存模型的时候只保存权重偏置参数，不保存节点值。所以复写Variable加以区分。
+  参数：
+  parameter.data 得到tensor数据
+  parameter.requires_grad 默认为True， BP过程中会求导
+  Parameter一般是在Modules中作为权重和偏置，自动加入参数列表，可以进行保存恢复。和Variable具有相同的运算。
+  我们可以这样简单区分，在计算图中，数据（包括输入数据和计算过程中产生的feature map等）时variable类型，该类型不会被保存到模型中。
+  网络的权重是parameter类型，在计算过程中会被更新，将会被保存到模型中。
 
 (5)CLASStorch.nn.CrossEntropyLoss(weight=None, size_average=None, ignore_index=-100, reduce=None, reduction='mean')
 这个标准结合了nn.LogSoftmax()和nn.NLLLoss()。
