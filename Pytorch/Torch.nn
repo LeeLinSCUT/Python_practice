@@ -40,3 +40,7 @@ Shape:
 Input (N,C) C:number of classes  N:minibatch
 Target:(N) N：minibatch
 Output:
+
+(6)CLASS torch.nn.BatchNorm1d(num_features, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+作用：将2D或者3D的输入进行批正则化，计算是将输入减去数学期望除以方差的平方根。同时带有一个权重和
+偏置，默认权重为1，偏置为0。该层默认也会对计算的平均值和方差作Momentum的操作，
