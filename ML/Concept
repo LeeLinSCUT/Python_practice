@@ -26,4 +26,6 @@
 （18）Non-linear Classificatin
 （19）多元分类的cost function：需要将四个不同的分类器输出的结果和真实分布求距离，然后在加在一起。目的是让每一个分类器输出的分布都足够接近
 真实的分布。
- (20)
+ (20)SVM优化：
+ Need fo specify: I)Choice of Parameter C II）Choice of Kernel（similarity function）
+ No Kernel（Linear Kernel）的情况下，预测“y=1" 如果θ_T*x>=0 （好像是不使用sigmoid函数了，把预测结果的公式和更新Loss的公式分开了。）
