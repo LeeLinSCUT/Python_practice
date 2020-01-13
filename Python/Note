@@ -1,0 +1,25 @@
+(1)argparse 命令行参数解析模块（parse语法分析)
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("echo")
+args = parser.parse_args() 
+print(args.echo)
+
+i)ArgumentParser.add_argument(name or flags...[, action][, nargs][, const][, default][, type][, choices][, required][, help][, metavar][, dest])
+定义一个新的命令行参数如何被解析，每个参数有他自己的细节介绍。
+
+ii)parse_args(args=None, nampespace=None)
+#将之前add_argument()定义的参数进行赋值，并返回相关的namespace。
+
+iii)namespace 
+Python 中name-object的关联存储在不同的作用域中，各个不同的作用域是相互独立的。
+而我们就在不同的作用域中搜索name-object。
+locals 是函数内的名字空间，包括局部变量和形参
+enclosing 外部嵌套函数的名字空间（闭包中常见）
+globals 全局变量，函数定义所在模块的名字空间
+builtins 内置模块的名字空间
+
+iv)ArgumentParser(prog=None,usage=None,description=None,epilog=None)
+功能：创建一个ArgumentParser实例，参数都为关键字参数。
+prog:文件名，默认为sys.argv[0]，用来在help信息中描述程序的名称 
+usage:描述程序用途的字符串 description：help信息前显示的信息 epilog：help信息之后显示的信息
