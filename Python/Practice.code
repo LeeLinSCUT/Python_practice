@@ -47,3 +47,26 @@ def triangles():
     return reduce(lambda x,y: x*10+y, L_l)+(.001)*reduce(lambda x,y:x*10+y,L_r)
    
   
+>>> print('''line1
+... line2
+... line3
+... )
+... ''')
+line1
+line2
+line3
+结论：'''里的内容可以自由换行，enter键是有效的。
+
+>>>b'\xe4\xb8\xad\xff'.decode('utf-8,errors='ignore')
+'中'
+结论：中一个字符在Unicode里面是用三个字节编码而成的，因此xff是多余的，传出errors=’ignore‘忽略掉了错误的字节。
+
+def hanoi(n, a, b, c):  #意思是借助b柱子将a上的盘全部转移到c上
+    if n == 1:
+        print(a, '-->', c)
+    else:
+        hanoi(n-1, a, c, b)   #意思是借助c柱子将a上的(n-1)盘全部转移到b上 （按照顺序）
+        print(a, '-->', c)    #然后将最底层的大盘放到c上
+        hanoi(n-1, b, a, c)   #意思是借助a柱子，将b上的盘子（按顺序）全部转移到c上
+        
+结论：在n=1的时候，功能成立，在n=2的时候功能也成立。
