@@ -25,3 +25,25 @@ master的一个指针HEAD。
 关联后，使用命令git push -u origin master第一次推送master分支的所有内容；
 
 此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
+
+在master分支上修复的bug，想要合并到当前dev分支，可以用git cherry-pick <commit>命令，把bug提交的修改“复制”到当前分支，避免重复劳动。
+分支文件都是需要提交的
+$ git switch -c dev #git switch命令加上-b参数表示创建并切换dev分支
+$ git branch #查看分支
+$ git swtich master #切换回master分支  
+$ git merge dev  #把dev分支的工作成果合并到master分支上： 合并某分支到当前分支
+$ git branch -d feature1 #删除分支
+$ git merge --no-ff -m "merge with no-ff" dev  #本次合并要创建一个新的commit，所以加上-m参数，把commit描述写进去。
+因为这次合并对master来说就是一次commit，如果使用了fast foward模式，只是把Head转移到dev上。
+$ git stash  可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作 此时还没有提交该分支
+$ git stash list #查看储存的工作现场
+$ git stash pop #恢复的同时把stash内容也删了
+
+
+但是，并不是一定要把本地分支往远程推送，那么，哪些分支需要推送，哪些不需要呢？
+master分支是主分支，因此要时刻与远程同步；
+dev分支是开发分支，团队所有成员都需要在上面工作，所以也需要与远程同步；
+$ git checkout -b dev origin/dev #建远程origin的dev分支到本地，于是他用这个命令创建本地dev分支
+先用git pull把最新的提交从origin/dev抓下来，然后，在本地合并，解决冲突，再推送
+git pull也失败了，原因是没有指定本地dev分支与远程origin/dev分支的链接，根据提示，设置dev和origin/dev的链接：
+$ git branch --set-upstream-to=origin/dev dev
