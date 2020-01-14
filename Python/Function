@@ -17,3 +17,25 @@
 函数名：isinstance(object, classinfo)
 函数解释：object---实例对象，classinfo -- 可以是直接或间接类名、基本类型或者由它们组成的元组。
 如果对象的类型与参数二的类型（classinfo）相同则返回 True，否则返回 False。
+
+函数名：random.randint(a,b)
+函数解释：生成的随机数n: a <= n <= b。
+
+函数名：random.seed()
+调用 random.random() 生成随机数时，每一次生成的数都是随机的。但是，当我们预先使用 random.seed(x) 设定好种子之后，其中的 x 可以是任意数字，
+如10，这个时候，先调用它的情况下，使用 random() 生成的随机数将会是同一个。使用random.random生成随机数。
+
+函数名：os.path.join()
+连接两个或更多的路径名组件,如果各组件名首字母不包含’/’，则函数会自动加上.如果有一个组件是一个绝对路径，则在它之前的所有组件均会被舍弃
+如果最后一个组件为空，则生成的路径以一个’/’分隔符结尾
+
+函数名：strip（）
+strip() 方法用于移除字符串头尾指定的字符（默认为空格或换行符）或字符序列。
+
+函数名：dictionary.items()
+Python 字典(Dictionary) items() 函数以【列表】返回【可遍历】的【(键, 值)】 【元组】数组。key value以元组的形式提取出来。
+
+函数名：字符串.format()
+函数解释：print("网站名：{name}, 地址 {url}".format(name="菜鸟教程", url="www.runoob.com"))
+print("{:.2f}".format(3.1415926)); 保留小数点后两位
+print("{0},{0},{0}".format('hello')) #hello被放进str中的大括号里面
