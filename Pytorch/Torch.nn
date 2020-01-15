@@ -45,3 +45,7 @@ Output:
 作用：将2D或者3D的输入进行批正则化，计算是将输入减去数学期望除以方差的平方根。同时带有一个权重和
 偏置，默认权重为1，偏置为0。该层默认也会对计算的平均值和方差作Momentum的操作。
 此也作为一层bn layer，num_features 指的是输入该层feature的个数。
+
+(7)torch.max(input, dim, keepdim=False, out=None) -> (Tensor, LongTensor)
+Returns a namedtuple (values, indices) where values is the maximum value of each row 
+of the input tensor in the given dimension dim
