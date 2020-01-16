@@ -39,3 +39,11 @@ Python 字典(Dictionary) items() 函数以【列表】返回【可遍历】的�
 函数解释：print("网站名：{name}, 地址 {url}".format(name="菜鸟教程", url="www.runoob.com"))
 print("{:.2f}".format(3.1415926)); 保留小数点后两位
 print("{0},{0},{0}".format('hello')) #hello被放进str中的大括号里面
+
+函数名：numpy.loadtxt(fname, dtype=, comments='#', delimiter=None, converters=None,
+skiprows=0, usecols=None, unpack=False, ndmin=0)
+函数作用：把每一行都作为一个列表，然后把整个文件作为一个大列表输出。
+
+函数名：numpy.random.choice(a, size=None, replace=True, p=None)
+函数作用：从给定的1维数组中产生一个随机样本，a是数组的话样本元素来自这个数组，如果是整数样本来自np.range(a)
+size：输出的格式  replace:输出的数能否重复，False表示不能
