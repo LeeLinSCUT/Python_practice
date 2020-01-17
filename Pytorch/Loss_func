@@ -14,3 +14,7 @@ Output:
 (2)torch.nn.MSELoss(reduction='mean')
 创造一个标准衡量input x和 target y之间的均方误差（平方L2范数），会求得每个值之间的方差，整理正一个list。
 如果reduction是mean的话就求平均，如果reduction是sum的话就求总数。
+
+（3）CLASStorch.nn.NLLLoss(weight=None, size_average=None, ignore_index=-100, reduce=None, reduction='mean')
+loss = F.nll_loss(pred, target) #example
+负对数损失函数 L（y)= -log(y)
