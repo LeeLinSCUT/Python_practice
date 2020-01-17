@@ -23,3 +23,6 @@ zip函数可用于将可迭代的对象作为参数，将对象中对应的参�
 
 (10)torch.manual_seed
 设定生成随机数的种子，并返回一个torch._C.Generator对象.
+
+（11）torch.bmm()
+批矩阵相乘
