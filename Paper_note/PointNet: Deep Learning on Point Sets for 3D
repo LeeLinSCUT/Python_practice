@@ -1,8 +1,9 @@
 Vac.
 voxel：体素 concatenate:连接 omit：忽略 composition：组成 alignment：对准对齐 rigid transformation：刚性转化 tailor：裁剪
 affine transformation:仿射变化（一个向量空间进行一次线性变换并接上一个平移，变换为另一个向量空间） orthogonal:正交 
-partition：分割  probe ：探测 inference:推理
-一、摘要
+partition：分割  probe ：探测 inference:推理 grain:颗粒  Evaluation metric ：评估指标
+
+一、摘要 
 1）点云的特点
 无序。点云数据是一个集合，对数据的顺序是不敏感的。这就意味这处理点云数据的模型需要对数据的不同排列保持不变性。
 目前文献中使用的方法包括将无序的数据重排序、用数据的所有排列进行数据增强然后使用RNN模型、用对称函数来保证排列不变性。
@@ -39,3 +40,6 @@ a)定理1证明了PointNet的网络结构能够拟合任意的连续集合函数
 b)对于物体的输入集Ns，我们获得的数据是是这个集合的子集，存在Cs最低下界的子集，在Cs和Ns之间的输入取值都能获得a）的结果。
 Cs的数据量取决于特征量。定理2(b)说明了最小集Cs的数据多少由maxpooling操作输出数据的维度K给出上界。
 四、实验部分
+部分分割是将全局的特征放到每一个点的特征上，然后还融合进行MLP处理从而得到每一个点的类别。
+语义理解实际上就是把整个场景作为部分分割的输入，二者的原理是一样的。
+XYZ，RGB和局部点密度，局部曲率和法线。
