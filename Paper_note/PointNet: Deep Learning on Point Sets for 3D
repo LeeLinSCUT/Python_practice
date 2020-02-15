@@ -1,6 +1,7 @@
 Vac.
 voxel：体素 concatenate:连接 omit：忽略 composition：组成 alignment：对准对齐 rigid transformation：刚性转化 tailor：裁剪
-affine transformation:仿射变化（一个向量空间进行一次线性变换并接上一个平移，变换为另一个向量空间） orthogonal:正交
+affine transformation:仿射变化（一个向量空间进行一次线性变换并接上一个平移，变换为另一个向量空间） orthogonal:正交 
+partition：分割  probe ：探测 inference:推理
 一、摘要
 1）点云的特点
 无序。点云数据是一个集合，对数据的顺序是不敏感的。这就意味这处理点云数据的模型需要对数据的不同排列保持不变性。
@@ -33,3 +34,8 @@ L_reg = ||I-A*A_T||^2
 4)Max操作
 网络把单个点初始的三维空间特征处理成1024个特征后，在每个
 三、理论分析
+a)定理1证明了PointNet的网络结构能够拟合任意的连续集合函数。其作用类似证明神经网络能够拟合任意连续函数一样。输入经过一个连续函数h(xi)。
+然后经过MAX操作。再经过一个连续函数的处理的结果，总是能和期望的f(S)足够的接近
+b)对于物体的输入集Ns，我们获得的数据是是这个集合的子集，存在Cs最低下界的子集，在Cs和Ns之间的输入取值都能获得a）的结果。
+Cs的数据量取决于特征量。定理2(b)说明了最小集Cs的数据多少由maxpooling操作输出数据的维度K给出上界。
+四、实验部分
