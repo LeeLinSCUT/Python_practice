@@ -1,7 +1,7 @@
 Vac.
 voxel：体素 concatenate:连接 omit：忽略 composition：组成 alignment：对准对齐 rigid transformation：刚性转化 tailor：裁剪
 affine transformation:仿射变化（一个向量空间进行一次线性变换并接上一个平移，变换为另一个向量空间） orthogonal:正交 
-partition：分割  probe ：探测 inference:推理 grain:颗粒  Evaluation metric ：评估指标
+partition：分割  probe ：探测 inference:推理 grain:颗粒  Evaluation metric ：评估指标  concatenate:连接
 
 一、摘要 
 1）点云的特点
