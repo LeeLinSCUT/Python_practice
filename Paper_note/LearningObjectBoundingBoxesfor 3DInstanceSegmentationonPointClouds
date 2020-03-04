@@ -1,8 +1,14 @@
 Vac：
  conceptually：从概念上讲 simultaneously：同时 Extensive：广泛  tackle：应对 obstacle:障碍 incur:招致 formulate：规定
- objectness：    explicitly：明确地  inevitably 不可避免地 precisely  恰好
+ objectness：    explicitly：明确地  inevitably 不可避免地 precisely  恰好 unoriented 无方向的 subsequent 随后的
 （一）引言
-1)anchor：在深度学习时代，物体检测问题通常都被建模成对一些候选区域进行分类和回归的问题。在单阶段检测器中，这些候选区域就是通过滑窗方式产生的 anchor；
-在两阶段检测器中，候选区域是 RPN 生成的 proposal，但是 RPN 本身仍然是对滑窗方式产生的 anchor 进行分类和回归。
+1)anchor：在深度学习时代，物体检测问题通常都被建模成对一些候选区域进行分类和回归的问题。在单阶段检测器中，这些候选区域就是通过滑窗方式
+产生的anchor；在两阶段检测器中，候选区域是 RPN 生成的 proposal，但是 RPN 本身仍然是对滑窗方式产生的 anchor 进行分类和回归。
 2)滑窗，anchor-free，anchor-based，bounding box的区别：
 3）CNN需要对点云数据进行体素化才行（解决了数据无序化，无结构，不统一的问题？
+
+4)box predition branch：
+Bbox定位的两个问题a.实例的数量是不固定的 b.实例的顺序是不固定的
+c.将全局的特征向量作为输入，然后直接输出一个固定数量的Bounding box和置信分数。这些分数表明这个盒子是否有包含实例。
+d.为了监督网络，设计了一种新型的bounding box association层和multi-criteria损失函数。
+e.我们需要决定那个预测box是最理想的。
